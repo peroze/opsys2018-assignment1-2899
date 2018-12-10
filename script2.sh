@@ -10,7 +10,7 @@ do
 	while read line;
 	do
  		if [[ $line = https* ]] ; then
-		(  # Ανοίγω παρενθέσεις για να αλλάξω προσορινά το $PWD 
+		(  	# Ανοίγω παρενθέσεις για να αλλάξω προσορινά το $PWD 
 		cd assignments
 		(git clone $line  &> /dev/null  && echo $line": Cloning OK" ) || <&2 echo $line": Cloning FAILED"  || echo $line": Cloning OK"
 		)  
@@ -22,7 +22,7 @@ cd assignments
 repos="$(find -maxdepth 1 -mindepth 1 -type d)"
 for i in $repos
 do
-	echo "${i##*/}":
+	echo "${i##*/}":	# Εκτυπώνω το ονομα του repo 
 	dicts=$(find $i/ -mindepth 1 -not -path "*\/.*"  -type d | wc -l)
 	txts=$(find $i/ -mindepth 1 -not -path "*\/.*"    -name "*.txt" | wc -l)
 	temp=$(find $i/ -mindepth 1  -not -path "*\/.*"   -type f | wc -l)
