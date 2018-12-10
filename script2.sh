@@ -22,10 +22,10 @@ cd assignments
 repos="$(find -maxdepth 1 -mindepth 1 -type d)"
 for i in $repos
 do
-	echo $i:
-	dicts=$(find $i/ -mindepth 1 -type d | wc -l)
-	txts=$(find $i/ -mindepth 1 -name "*.txt" | wc -l)
-	temp=$(find $i/ -mindepth 1 -type f | wc -l)
+	echo "${i##*/}":
+	dicts=$(find $i/ -mindepth 1 -not -path "*\/.*"  -type d | wc -l)
+	txts=$(find $i/ -mindepth 1 -not -path "*\/.*"    -name "*.txt" | wc -l)
+	temp=$(find $i/ -mindepth 1  -not -path "*\/.*"   -type f | wc -l)
 	oths=$(($temp-$txts))
 	echo Number of directories: $dicts
 	echo Number of txt files: $txts
